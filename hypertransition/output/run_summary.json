@@ -1,0 +1,39 @@
+{
+  "started_at": "2026-08-02T14:22:52.975211+00:00",
+  "keyword": "NFT",
+  "countries": {
+    "KR": {
+      "status": "error",
+      "segments": [],
+      "error": "RuntimeError: request failed: Expecting value: line 1 column 1 (char 0)"
+    },
+    "JP": {
+      "status": "error",
+      "segments": [],
+      "error": "RuntimeError: request failed: Expecting value: line 1 column 1 (char 0)"
+    },
+    "TW": {
+      "status": "error",
+      "segments": [],
+      "error": "RuntimeError: request failed: Expecting value: line 1 column 1 (char 0)"
+    },
+    "SG": {
+      "status": "error",
+      "segments": [],
+      "error": "RuntimeError: request failed: Expecting value: line 1 column 1 (char 0)"
+    },
+    "US": {
+      "status": "error",
+      "segments": [],
+      "error": "RuntimeError: request failed: Expecting value: line 1 column 1 (char 0)"
+    },
+    "GB": {
+      "status": "error",
+      "segments": [],
+      "error": "RuntimeError: request failed: Expecting value: line 1 column 1 (char 0)"
+    }
+  },
+  "finished_at": "2026-08-02T14:46:35.821907+00:00",
+  "ok_count": 0,
+  "error_count": 6
+}
