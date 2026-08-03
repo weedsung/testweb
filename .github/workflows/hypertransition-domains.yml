@@ -1,0 +1,33 @@
+name: Hypertransition Domain Pilot
+
+on:
+  pull_request:
+    paths:
+      - "hypertransition/domain_pilot.py"
+      - "hypertransition/archive_pilot.py"
+      - "hypertransition/requirements.txt"
+      - ".github/workflows/hypertransition-domains.yml"
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r hypertransition/requirements.txt
+      - name: Run domain pilot
+        continue-on-error: true
+        run: python hypertransition/domain_pilot.py 2>&1 | tee hypertransition/domain_pilot.log
+      - name: Upload domain pilot results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hypertransition-domain-pilot
+          path: |
+            hypertransition/output_domains
+            hypertransition/domain_pilot.log
+          if-no-files-found: warn
