@@ -3,8 +3,7 @@ name: Hypertransition NFT Trends Pilot
 on:
   push:
     paths:
-      - "hypertransition/collector.py"
-      - "hypertransition/requirements.txt"
+      - "hypertransition/**"
       - ".github/workflows/hypertransition-trends.yml"
   pull_request:
     paths:
@@ -18,34 +17,24 @@ permissions:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -r hypertransition/requirements.txt
-      - name: Collect
+      - name: Install Chromium
+        run: python -m playwright install --with-deps chromium
+      - name: Collect through browser
         continue-on-error: true
-        run: python hypertransition/collector.py 2>&1 | tee hypertransition/collector.log
+        run: python hypertransition/browser_collector.py 2>&1 | tee hypertransition/browser_collector.log
       - name: Upload collection result
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: hypertransition-nft-trends
+          name: hypertransition-nft-browser
           path: |
-            hypertransition/output
-            hypertransition/collector.log
+            hypertransition/output_browser
+            hypertransition/browser_collector.log
           if-no-files-found: warn
-      - name: Commit outputs
-        if: always() && github.event_name != 'pull_request'
-        run: |
-          git config user.name "hypertransition-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add hypertransition/output hypertransition/collector.log || true
-          if git diff --cached --quiet; then
-            echo "No outputs"
-          else
-            git commit -m "data: collect NFT Google Trends pilot"
-            git push
-          fi
