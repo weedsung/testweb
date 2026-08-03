@@ -1,0 +1,1 @@
+Trigger the Hypertransition NFT Google Trends pilot workflow.
