@@ -1,5 +1,5 @@
 {
-  "started_at": "2026-08-02T14:22:52.975211+00:00",
+  "started_at": "2026-08-03T04:30:59.003921+00:00",
   "keyword": "NFT",
   "countries": {
     "KR": {
@@ -33,7 +33,7 @@
       "error": "RuntimeError: request failed: Expecting value: line 1 column 1 (char 0)"
     }
   },
-  "finished_at": "2026-08-02T14:46:35.821907+00:00",
+  "finished_at": "2026-08-03T04:54:41.907255+00:00",
   "ok_count": 0,
   "error_count": 6
 }
