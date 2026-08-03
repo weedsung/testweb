@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "hypertransition/domain_pilot.py"
+      - "hypertransition/domain_pilot_runner.py"
       - "hypertransition/archive_pilot.py"
       - "hypertransition/requirements.txt"
       - ".github/workflows/hypertransition-domains.yml"
@@ -21,7 +22,7 @@ jobs:
       - run: pip install -r hypertransition/requirements.txt
       - name: Run domain pilot
         continue-on-error: true
-        run: python hypertransition/domain_pilot.py 2>&1 | tee hypertransition/domain_pilot.log
+        run: python hypertransition/domain_pilot_runner.py 2>&1 | tee hypertransition/domain_pilot.log
       - name: Upload domain pilot results
         if: always()
         uses: actions/upload-artifact@v4
