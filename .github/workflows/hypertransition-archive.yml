@@ -1,0 +1,32 @@
+name: Hypertransition GoogleTrendArchive Pilot
+
+on:
+  pull_request:
+    paths:
+      - "hypertransition/archive_pilot.py"
+      - "hypertransition/requirements.txt"
+      - ".github/workflows/hypertransition-archive.yml"
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r hypertransition/requirements.txt
+      - name: Run archive pilot
+        continue-on-error: true
+        run: python hypertransition/archive_pilot.py 2>&1 | tee hypertransition/archive_pilot.log
+      - name: Upload archive pilot results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hypertransition-archive-pilot
+          path: |
+            hypertransition/output_archive
+            hypertransition/archive_pilot.log
+          if-no-files-found: warn
