@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "hypertransition/archive_pilot.py"
+      - "hypertransition/archive_sensitivity.py"
       - "hypertransition/requirements.txt"
       - ".github/workflows/hypertransition-archive.yml"
   workflow_dispatch:
@@ -21,6 +22,9 @@ jobs:
       - name: Run archive pilot
         continue-on-error: true
         run: python hypertransition/archive_pilot.py 2>&1 | tee hypertransition/archive_pilot.log
+      - name: Run sensitivity checks
+        continue-on-error: true
+        run: python hypertransition/archive_sensitivity.py 2>&1 | tee hypertransition/archive_sensitivity.log
       - name: Upload archive pilot results
         if: always()
         uses: actions/upload-artifact@v4
@@ -29,4 +33,5 @@ jobs:
           path: |
             hypertransition/output_archive
             hypertransition/archive_pilot.log
+            hypertransition/archive_sensitivity.log
           if-no-files-found: warn
