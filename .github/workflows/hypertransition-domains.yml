@@ -5,6 +5,7 @@ on:
     paths:
       - "hypertransition/domain_pilot.py"
       - "hypertransition/domain_pilot_runner.py"
+      - "hypertransition/domain_pilot_runner_v2.py"
       - "hypertransition/domain_validation.py"
       - "hypertransition/archive_pilot.py"
       - "hypertransition/requirements.txt"
@@ -21,9 +22,9 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r hypertransition/requirements.txt
-      - name: Run domain pilot
+      - name: Run domain pilot v0.3
         continue-on-error: false
-        run: python hypertransition/domain_pilot_runner.py 2>&1 | tee hypertransition/domain_pilot.log
+        run: python hypertransition/domain_pilot_runner_v2.py 2>&1 | tee hypertransition/domain_pilot.log
       - name: Validate strict classification
         continue-on-error: false
         run: python hypertransition/domain_validation.py 2>&1 | tee hypertransition/domain_validation.log
